@@ -29,7 +29,8 @@ window.PROJECTS = [
 
   { id: 'morimonchis', pillar: 'games', featured: true, year: '2025–26',
     img: ['morimonchis-huevos', 'morimonchis-arena'],
-    video: { loop: 'morimonchis-loop' },
+    video: { loop: 'morimonchis-loop',
+      full: { es: 'video/morimonchis-promo.mp4', en: 'video/morimonchis-promo.mp4' } },
     tags: ['Unity 6', 'C#', 'UGS Cloud Save', 'NavMesh', 'ScriptableObjects'],
     links: { repo: 'https://github.com/KurusuDes/RunRunSimulator' },
     es: { title: 'MoriMonchis', status: 'En desarrollo',
