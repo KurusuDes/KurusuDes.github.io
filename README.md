@@ -1,6 +1,8 @@
 # kurusudes.github.io
 
-Portafolio de Juan Neyra: videojuegos, web e IA local.
+Portafolio de **Juan Neyra** — Game Developer · Software Developer · AI Developer · Web Developer (Lima, Perú).
+
+Videojuegos en Unity y para la web, sitios para marcas reales y flujos de IA local. En vivo: https://kurusudes.github.io
 
 Sitio estático, sin build: `index.html` + `css/` + `js/`. Se publica tal cual con GitHub Pages.
 
