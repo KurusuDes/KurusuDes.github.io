@@ -253,7 +253,7 @@ window.UI = {
   es: {
     'nav.games': 'Juegos', 'nav.web': 'Web', 'nav.ai': 'IA local', 'nav.method': 'Método',
     'hero.role': 'Game · Software · AI · Web Developer — Lima, Perú',
-    'hero.lead': 'Desarrollador de Software y Videojuegos con más de 5 años de experiencia. También desarrollador web full stack sólido y de flujos de IA local.',
+    'hero.lead': 'Game developer con más de 5 años creando juegos en Unity/C#, del primer prototipo al lanzamiento comercial. Además, desarrollo web full stack y flujos de IA local que aceleran la producción.',
     'hero.cta': 'Ver trabajos',
     'loom.label': 'Tejido nº',
     'loom.note': 'Se teje con código a partir de la fecha de hoy.',
@@ -277,7 +277,7 @@ window.UI = {
   en: {
     'nav.games': 'Games', 'nav.web': 'Web', 'nav.ai': 'Local AI', 'nav.method': 'Method',
     'hero.role': 'Game · Software · AI · Web Developer — Lima, Peru',
-    'hero.lead': 'Software and Game Developer with 5+ years of experience. Also a strong full-stack web developer and builder of local AI workflows.',
+    'hero.lead': 'Game developer with 5+ years building games in Unity/C#, from first prototype to commercial release. I also bring full-stack web skills and local AI workflows that speed up production.',
     'hero.cta': 'See the work',
     'loom.label': 'Weave no.',
     'loom.note': 'Woven by code from today’s date.',
