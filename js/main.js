@@ -13,8 +13,8 @@
   };
 
   // ── idioma ──
-  let lang = 'es';
-  try { lang = localStorage.getItem('lang') || (navigator.language || 'es').slice(0, 2); } catch (e) {}
+  let lang = 'en';
+  try { lang = localStorage.getItem('lang') || 'en'; } catch (e) {}
   if (lang !== 'es' && lang !== 'en') lang = 'en';
   const t = k => (UI[lang] && UI[lang][k]) || UI.es[k] || k;
 
