@@ -1,6 +1,7 @@
 // Todo el contenido del portafolio vive aquí. Añadir un trabajo = añadir un objeto a PROJECTS.
 // pillar: games | web  (decide el color del hilo y la sección). La IA local tiene su propio bloque: AI_BLOCK.
 // img: ruta en /img, o null para que se teja una portada a partir del id
+// gallery: más capturas ('shots/x' = img/shots/x.webp, o una URL) y vídeos ({ src, poster }) para la ficha
 // links: { play, live, trailer, repo, itch, lab }
 
 window.PILLARS = [
@@ -20,6 +21,15 @@ window.PROJECTS = [
     img: ['https://cdn.akamai.steamstatic.com/steam/apps/1429880/capsule_616x353.jpg',
           'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/ca71b2e99a91333b909fff49e175f1e35592c343/ss_ca71b2e99a91333b909fff49e175f1e35592c343.1920x1080.jpg'],
     credit: '© .GRAVITY · Steam',
+    gallery: [
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/4b1072c7a09b2e582b37605755d53c7c644d89af/ss_4b1072c7a09b2e582b37605755d53c7c644d89af.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/1c3980801943f06a1e237e7211401f5f8e1f92e0/ss_1c3980801943f06a1e237e7211401f5f8e1f92e0.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/8e4894eab2c86f5559e78d00995d8410fdf4d013/ss_8e4894eab2c86f5559e78d00995d8410fdf4d013.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/bbd8026c6249e91cb99652777501c1421fc3c8c3/ss_bbd8026c6249e91cb99652777501c1421fc3c8c3.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/599f1aa6fefa717e9481e915551685506de18eaa/ss_599f1aa6fefa717e9481e915551685506de18eaa.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/86284be91f35c6d89a5cadc876a9eda72531b022/ss_86284be91f35c6d89a5cadc876a9eda72531b022.1920x1080.jpg',
+      'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1429880/3447113847fe421f9833014773f41fc3440be8a5/ss_3447113847fe421f9833014773f41fc3440be8a5.1920x1080.jpg',
+    ],
     tags: ['Unity', 'C#', 'Gameplay systems', 'Editor tools'],
     links: { steam: 'https://store.steampowered.com/app/1429880/Little_Sim_World/' },
     es: { title: 'Little Sim World', status: 'Publicado en Steam · contrato de 4 meses',
@@ -31,6 +41,7 @@ window.PROJECTS = [
     img: ['morimonchis-huevos', 'morimonchis-arena'],
     video: { loop: 'morimonchis-loop',
       full: { es: 'video/morimonchis-promo.mp4', en: 'video/morimonchis-promo.mp4' } },
+    gallery: [{ src: 'video/morimonchis-growth.mp4', poster: 'video/morimonchis-growth.webp' }],
     tags: ['Unity 6', 'C#', 'UGS Cloud Save', 'NavMesh', 'ScriptableObjects'],
     links: { repo: 'https://github.com/KurusuDes/RunRunSimulator' },
     es: { title: 'MoriMonchis', status: 'En desarrollo',
@@ -41,6 +52,10 @@ window.PROJECTS = [
   { id: 'blobvarium', pillar: 'games', year: '2026', img: 'blobvarium',
     video: { loop: 'blobvarium-loop', fit: 'contain', bg: '#E9DFC8',
       full: { es: 'video/blobvarium-promo-es.mp4', en: 'video/blobvarium-promo-en.mp4' } },
+    gallery: ['shots/blobvarium-auction', 'shots/blobvarium-many-blobis', 'shots/blobvarium-sheet',
+      { src: 'video/blobvarium-orb-hatch.mp4', poster: 'video/blobvarium-orb-hatch.webp' },
+      { src: 'video/blobvarium-nursery-throw.mp4', poster: 'video/blobvarium-nursery-throw.webp' },
+      { src: 'video/blobvarium-auction.mp4', poster: 'video/blobvarium-auction.webp' }],
     tags: ['Python', 'NumPy', 'Pillow', 'Supabase', 'Vercel'],
     links: { live: 'https://blobvarium.com' },
     es: { title: 'Blobvarium', status: 'En línea',
@@ -49,6 +64,8 @@ window.PROJECTS = [
       text: 'A new Inca creature is born every day, drawn 100% by code from a seed, with no AI and no base images. You win it in a coin auction.' } },
 
   { id: 'axie', pillar: 'games', year: '2023 · 2026', img: 'axie',
+    gallery: ['shots/axie-evo-purity', 'shots/axie-nightmare', 'shots/axie-hazards', 'shots/axie-coop-themes',
+      'shots/axie-coop-online', 'shots/axie-lobby-select', 'shots/axie-stage-clear-axp'],
     tags: ['Unity 6', 'C#', 'UGS Sessions + Relay', 'Ronin', 'Spine'],
     links: { itch: 'https://kurusudes.itch.io/axiedarknessarise' },
     es: { title: 'Axie Darkness Arise', status: 'Revival · 4.º en la jam',
@@ -61,6 +78,8 @@ window.PROJECTS = [
     video: { loop: 'katan-loop',
       full: { es: 'https://kurusudes.github.io/CatanTestFriendos/showcase/katan-x-amiguites-trailer.mp4',
               en: 'https://kurusudes.github.io/CatanTestFriendos/showcase/katan-x-amiguites-trailer-en.mp4' } },
+    gallery: ['shots/katan-menu', 'shots/katan-in-game', 'shots/katan-blindfold', 'shots/katan-fog',
+      'shots/katan-adhd-machines', 'shots/katan-reviews'],
     tags: ['JavaScript', 'Three.js', 'PeerJS · WebRTC', 'Bots'],
     links: { play: 'https://kurusudes.github.io/CatanTestFriendos/',
              repo: 'https://github.com/KurusuDes/CatanTestFriendos' },
@@ -73,6 +92,8 @@ window.PROJECTS = [
     video: { loop: 'inflation-loop',
       full: { es: 'https://kurusudes.github.io/rpg-anillos/trailer/inflation-coop-trailer-en.mp4',
               en: 'https://kurusudes.github.io/rpg-anillos/trailer/inflation-coop-trailer-en.mp4' } },
+    gallery: ['shots/inflation-combos', 'shots/inflation-levels', 'shots/inflation-attributes', 'shots/inflation-shop',
+      'shots/inflation-exploration', 'shots/inflation-map', 'shots/inflation-group', 'shots/inflation-duel'],
     tags: ['TypeScript', 'Three.js', 'PeerJS · WebRTC', 'Vite', 'Blender'],
     links: { play: 'https://kurusudes.github.io/rpg-anillos/' },
     es: { title: 'Inflation! Coop Lite-RPG', status: 'Jugable',
@@ -122,7 +143,8 @@ window.PROJECTS = [
       text: 'A full redesign for an aesthetic clinic in Lima: mobile-first, with a virtual advisor that answers and captures patients around the clock, content synced from their social accounts and a panel the team runs on its own.' } },
 
   { id: 'ninawi', pillar: 'web', year: '2026', img: null,
-    video: { loop: 'ninawi-loop' },
+    video: { loop: 'ninawi-loop',
+      full: { es: 'video/ninawi-trailer.mp4', en: 'video/ninawi-trailer.mp4' } },
     tags: ['Matter.js', 'WebGL', 'Vercel'],
     links: { live: 'https://ninawi.com' },
     es: { title: 'Ninawi', status: 'En línea',
@@ -265,7 +287,8 @@ window.UI = {
     'threads.projects': 'trabajos', 'threads.flows': 'flujos',
     'link.play': 'Jugar', 'link.live': 'Ver en vivo', 'link.trailer': 'Tráiler', 'link.repo': 'Código',
     'link.itch': 'itch.io', 'link.steam': 'Ver en Steam', 'link.lab': 'Ver en vivo', 'link.video': 'Ver tráiler', 'player.close': 'Cerrar',
-    'card.private': 'Código privado',
+    'card.private': 'Código privado', 'card.media': 'capturas y vídeos',
+    'detail.prev': 'Anterior', 'detail.next': 'Siguiente',
     'method.title': 'Cómo trabajo',
     'method.agents.h': 'Con agentes, pero verificando',
     'method.agents.p': 'Desarrollo en Unity junto a Claude Code conectado al editor por MCP: el agente lee la escena, entra en Play y comprueba con capturas lo que cambió. Cada proyecto lleva su documentación viva en Obsidian, con una nota por script (más de 200 en MoriMonchis). Ese método lo empaqueté en un kit para que un proyecto nuevo no empiece de cero.',
@@ -289,7 +312,8 @@ window.UI = {
     'threads.projects': 'projects', 'threads.flows': 'workflows',
     'link.play': 'Play', 'link.live': 'Live', 'link.trailer': 'Trailer', 'link.repo': 'Code',
     'link.itch': 'itch.io', 'link.steam': 'View on Steam', 'link.lab': 'Live', 'link.video': 'Watch trailer', 'player.close': 'Close',
-    'card.private': 'Private code',
+    'card.private': 'Private code', 'card.media': 'shots & videos',
+    'detail.prev': 'Previous', 'detail.next': 'Next',
     'method.title': 'How I work',
     'method.agents.h': 'With agents, and checking their work',
     'method.agents.p': 'I build in Unity alongside Claude Code wired into the editor through MCP: the agent reads the scene, enters Play mode and verifies changes with screenshots. Every project carries living documentation in Obsidian, one note per script (200+ in MoriMonchis). I packaged that method into a starter kit so new projects don’t start from zero.',

@@ -26,11 +26,38 @@
 
   const LINK_ORDER = ['play', 'live', 'steam', 'trailer', 'itch', 'repo'];
   const hasCover = p => (p.img || p.video ? 1 : 0);
+  const imgsOf = p => (Array.isArray(p.img) ? p.img : p.img ? [p.img] : []);
+  const imgUrl = src => (src.startsWith('http') ? src : `img/${src}.webp`);
+
+  // todo lo que se ve en la ficha: el tráiler, las portadas de la tarjeta y la galería de data.js
+  function gallery(p) {
+    const items = [];
+    const v = p.video;
+    if (v && v.full) items.push({ video: v.full[lang], poster: v.loop ? `video/${v.loop}.webp` : null });
+    else if (v) items.push({ video: `video/${v.loop}.mp4`, poster: `video/${v.loop}.webp` });
+    imgsOf(p).forEach(src => items.push({ img: imgUrl(src) }));
+    (p.gallery || []).forEach(g => items.push(typeof g === 'string' ? { img: imgUrl(g) }
+      : { video: g.src, poster: g.poster }));
+    return items;
+  }
+
+  function linkEls(p) {
+    const L = p[lang];
+    const links = LINK_ORDER.filter(k => p.links[k]).map(k =>
+      h('a', { href: p.links[k], ...(p.links[k].startsWith('http') ? { target: '_blank', rel: 'noopener' } : {}) },
+        t('link.' + k), h('span', { 'aria-hidden': 'true', text: ' ↗' })));
+    if (p.video && p.video.full)
+      links.splice(1, 0, h('button', { type: 'button', class: 'card__watch', 'data-open': p.id, 'data-at': 0 },
+        h('span', { 'aria-hidden': 'true', text: '▶ ' }), t('link.video')));
+    if (!p.links.repo && !p.links.live && !p.links.play && !p.links.steam)
+      links.push(h('span', { class: 'card__private', text: t('card.private') }));
+    return links;
+  }
 
   function card(p) {
     const L = p[lang];
     const pillar = PILLARS.find(x => x.id === p.pillar);
-    const imgs = Array.isArray(p.img) ? p.img : p.img ? [p.img] : [];
+    const imgs = imgsOf(p);
 
     let media;
     if (p.video) {
@@ -51,23 +78,17 @@
         h('p', { class: 'card__stamp', text: L.status }));
     }
 
-    const links = LINK_ORDER.filter(k => p.links[k]).map(k =>
-      h('a', { href: p.links[k], ...(p.links[k].startsWith('http') ? { target: '_blank', rel: 'noopener' } : {}) },
-        t('link.' + k), h('span', { 'aria-hidden': 'true', text: ' ↗' })));
-    if (p.video && p.video.full)
-      links.splice(1, 0, h('button', { type: 'button', class: 'card__watch', 'data-full': p.video.full[lang], 'data-title': L.title },
-        h('span', { 'aria-hidden': 'true', text: '▶ ' }), t('link.video')));
-    if (!p.links.repo && !p.links.live && !p.links.play && !p.links.steam)
-      links.push(h('span', { class: 'card__private', text: t('card.private') }));
+    const n = gallery(p).length;
+    if (n > 1) media.append(h('p', { class: 'card__count', 'aria-hidden': 'true', text: `▦ ${n} ${t('card.media')}` }));
 
-    return h('article', { class: `card${p.featured ? ' card--featured' : ''}`, style: `--c:${pillar.color}` },
+    return h('article', { class: `card${p.featured ? ' card--featured' : ''}`, style: `--c:${pillar.color}`, 'data-id': p.id },
       media,
       h('div', { class: 'card__body' },
         h('p', { class: 'card__meta' }, h('span', { text: p.year }), h('span', { class: 'card__status', text: L.status })),
-        h('h3', { class: 'card__title', text: L.title }),
+        h('h3', { class: 'card__title' }, h('button', { type: 'button', class: 'card__open', 'data-open': p.id, text: L.title })),
         h('p', { class: 'card__text', text: L.text }),
         h('ul', { class: 'card__tags' }, p.tags.map(tag => h('li', { text: tag }))),
-        h('p', { class: 'card__links' }, links)));
+        h('p', { class: 'card__links' }, linkEls(p))));
   }
 
   // ── bloque de IA local: por qué, qué se despliega y cómo se usa ──
@@ -158,20 +179,87 @@
     document.querySelectorAll('video[data-src]').forEach(v => { v.muted = true; io.observe(v); });
   }
 
-  // reproductor del tráiler completo, con sonido
-  const player = $('.player');
-  const pv = $('.player video');
+  // ── ficha del trabajo: visor grande con capturas y vídeos (con sonido y barra), miniaturas y textos ──
+  const detail = $('.detail');
+  const stage = $('.detail__stage');
+  let cur = null;
+
+  function openDetail(id, at = 0) {
+    const p = PROJECTS.find(x => x.id === id);
+    if (!p) return;
+    const L = p[lang];
+    cur = { p, items: gallery(p), i: 0 };
+    detail.style.setProperty('--c', PILLARS.find(x => x.id === p.pillar).color);
+    $('.detail__title').textContent = L.title;
+    const thumbs = $('.detail__thumbs');
+    thumbs.hidden = cur.items.length < 2;
+    thumbs.replaceChildren(...cur.items.map((it, i) =>
+      h('button', { type: 'button', class: `detail__thumb${it.video ? ' is-video' : ''}`, 'data-i': i,
+                    'aria-label': `${i + 1} / ${cur.items.length}` },
+        it.poster || it.img ? h('img', { src: it.video ? it.poster : it.img.replace('.1920x1080.', '.600x338.'), alt: '', loading: 'lazy' }) : null)));
+    $('.detail__body').replaceChildren(
+      h('p', { class: 'card__meta' }, h('span', { text: p.year }), h('span', { class: 'card__status', text: L.status })),
+      h('p', { class: 'detail__text', text: L.text }),
+      h('ul', { class: 'card__tags' }, p.tags.map(tag => h('li', { text: tag }))),
+      h('p', { class: 'card__links' }, linkEls(p).filter(el => !el.classList.contains('card__watch'))));
+    detail.showModal();
+    show(at);
+  }
+
+  function show(i) {
+    const { p, items } = cur;
+    const n = items.length;
+    const old = stage.querySelector('video');
+    if (old) old.pause();
+    if (!n) {
+      // sin capturas todavía: el mismo tejido de la tarjeta
+      const cv = h('canvas', { class: 'card__cover', 'aria-hidden': 'true' });
+      stage.replaceChildren(cv, h('p', { class: 'card__stamp', text: p[lang].status }));
+      Telar.cover(cv, p.id, PILLAR_COLORS[p.pillar]);
+      return;
+    }
+    cur.i = (i + n) % n;
+    const it = items[cur.i];
+    const el = it.video
+      ? h('video', { src: it.video, poster: it.poster, controls: '', playsinline: '', preload: 'metadata' })
+      : h('img', { src: it.img, alt: `${p[lang].title} · ${cur.i + 1} / ${n}` });
+    const nav = n > 1 ? [
+      h('button', { type: 'button', class: 'detail__nav detail__nav--prev', 'data-step': -1, 'aria-label': t('detail.prev'), text: '‹' }),
+      h('button', { type: 'button', class: 'detail__nav detail__nav--next', 'data-step': 1, 'aria-label': t('detail.next'), text: '›' }),
+      h('p', { class: 'detail__count', text: `${cur.i + 1} / ${n}` })] : [];
+    stage.replaceChildren(el, ...nav);
+    if (it.video) el.play().catch(() => {});
+    document.querySelectorAll('.detail__thumb').forEach((b, k) => b.setAttribute('aria-current', k === cur.i));
+    const on = document.querySelector('.detail__thumb[aria-current="true"]');
+    if (on) on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
   document.addEventListener('click', e => {
-    const b = e.target.closest('[data-full]');
-    if (!b) return;
-    pv.src = b.dataset.full;
-    $('.player__title').textContent = b.dataset.title;
-    player.showModal();
-    pv.play().catch(() => {});
+    const o = e.target.closest('[data-open]');
+    if (o) { openDetail(o.dataset.open, +(o.dataset.at || 0)); return; }
+    const c = e.target.closest('.card[data-id]');
+    if (c && !e.target.closest('a, button')) openDetail(c.dataset.id);
   });
-  player.addEventListener('close', () => { pv.pause(); pv.removeAttribute('src'); pv.load(); });
-  player.addEventListener('click', e => { if (e.target === player) player.close(); });
-  $('.player__close').addEventListener('click', () => player.close());
+  detail.addEventListener('click', e => {
+    if (e.target === detail) return detail.close();
+    const s = e.target.closest('[data-step]');
+    if (s) return show(cur.i + +s.dataset.step);
+    const th = e.target.closest('[data-i]');
+    if (th) show(+th.dataset.i);
+  });
+  detail.addEventListener('keydown', e => {
+    if (!cur || e.target.tagName === 'VIDEO') return;   // en el vídeo, las flechas adelantan y atrasan
+    if (e.key === 'ArrowRight') show(cur.i + 1);
+    if (e.key === 'ArrowLeft') show(cur.i - 1);
+  });
+  detail.addEventListener('close', () => {
+    if (detail.open) return;   // el evento llega tarde: si ya se abrió otra ficha, no se toca
+    const v = stage.querySelector('video');
+    if (v) { v.pause(); v.removeAttribute('src'); v.load(); }
+    stage.replaceChildren();
+    cur = null;
+  });
+  $('.detail__close').addEventListener('click', () => detail.close());
 
   function drawCovers() {
     document.querySelectorAll('canvas[data-cover]').forEach(cv =>

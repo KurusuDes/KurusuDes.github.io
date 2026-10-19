@@ -93,12 +93,14 @@
   </div>
 </footer>
 
-<dialog class="player" aria-labelledby="player-title">
-  <div class="player__bar">
-    <p class="player__title" id="player-title"></p>
-    <button class="player__close" type="button" data-i18n="player.close">Cerrar</button>
+<dialog class="detail" aria-labelledby="detail-title">
+  <div class="detail__bar">
+    <h2 class="detail__title" id="detail-title"></h2>
+    <button class="detail__close" type="button" data-i18n="player.close">Cerrar</button>
   </div>
-  <video controls playsinline preload="none"></video>
+  <div class="detail__stage"></div>
+  <div class="detail__thumbs"></div>
+  <div class="detail__body"></div>
 </dialog>
 
 <script src="js/data.js"></script>
