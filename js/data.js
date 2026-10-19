@@ -3,6 +3,9 @@
 // img: ruta en /img, o null para que se teja una portada a partir del id
 // gallery: más capturas ('shots/x' = img/shots/x.webp, o una URL) y vídeos ({ src, poster }) para la ficha
 // links: { play, live, trailer, repo, itch, lab }
+// role (en es/en): qué hice yo y cuál fue el problema técnico difícil; sale en la tarjeta y en la ficha
+// stats (en es/en): cifras medidas, [número, etiqueta]
+// lab: true → sin capturas todavía; va al grupo plegado "Lab / En curso" al final de su sección, no como tarjeta
 
 window.PILLARS = [
   { id: 'games', color: 'var(--cochinilla)',
@@ -33,9 +36,11 @@ window.PROJECTS = [
     tags: ['Unity', 'C#', 'Gameplay systems', 'Editor tools'],
     links: { steam: 'https://store.steampowered.com/app/1429880/Little_Sim_World/' },
     es: { title: 'Little Sim World', status: 'Publicado en Steam · contrato de 4 meses',
-      text: 'Simulador de vida 2D de Blue Gravity Studios, publicado en Steam. Trabajé cuatro meses como desarrollador Unity contratado por el estudio: sistemas de juego, features y herramientas para el equipo.' },
+      text: 'Simulador de vida 2D de Blue Gravity Studios, publicado en Steam.',
+      role: 'Cuatro meses como desarrollador Unity contratado: sistemas de juego, features y herramientas de editor dentro de un proyecto ya en producción, con un equipo que publicaba en Steam.' },
     en: { title: 'Little Sim World', status: 'Shipped on Steam · 4-month contract',
-      text: 'A 2D life sim by Blue Gravity Studios, released on Steam. I spent four months as a contract Unity developer for the studio, working on gameplay systems, features and tools for the team.' } },
+      text: 'A 2D life sim by Blue Gravity Studios, released on Steam.',
+      role: 'Four months as a contract Unity developer: gameplay systems, features and editor tools inside a live production codebase, on a team shipping to Steam.' } },
 
   { id: 'morimonchis', pillar: 'games', featured: true, year: '2025–26',
     img: ['morimonchis-huevos', 'morimonchis-arena'],
@@ -45,9 +50,11 @@ window.PROJECTS = [
     tags: ['Unity 6', 'C#', 'UGS Cloud Save', 'NavMesh', 'ScriptableObjects'],
     links: { repo: 'https://github.com/KurusuDes/RunRunSimulator' },
     es: { title: 'MoriMonchis', status: 'En desarrollo',
-      text: 'Criaturas que se crían por genética: cada parte del cuerpo se hereda con sus propias probabilidades. En la arena salen de expedición con IA propia y minan, cazan, hacen de señuelo o huyen según su personalidad.' },
+      text: 'Criaturas que se crían por genética: cada parte del cuerpo se hereda con sus propias probabilidades. En la arena salen de expedición con IA propia y minan, cazan, hacen de señuelo o huyen según su personalidad.',
+      role: 'Proyecto en solitario, diseño y código. Lo difícil: herencia genética por parte del cuerpo con sus propias probabilidades e IA de expedición que decide según la personalidad, con el progreso en UGS Cloud Save.' },
     en: { title: 'MoriMonchis', status: 'In development',
-      text: 'Creatures bred through genetics: every body part is inherited with its own odds. In the arena they head out on expeditions with their own AI, mining, hunting, baiting or fleeing depending on personality.' } },
+      text: 'Creatures bred through genetics: every body part is inherited with its own odds. In the arena they head out on expeditions with their own AI, mining, hunting, baiting or fleeing depending on personality.',
+      role: 'Solo project, design and code. The hard part: per-body-part genetic inheritance with its own odds, and expedition AI that decides by personality, with progress kept in UGS Cloud Save.' } },
 
   { id: 'blobvarium', pillar: 'games', year: '2026', img: 'blobvarium',
     video: { loop: 'blobvarium-loop', fit: 'contain', bg: '#E9DFC8',
@@ -59,9 +66,13 @@ window.PROJECTS = [
     tags: ['Python', 'NumPy', 'Pillow', 'Supabase', 'Vercel'],
     links: { live: 'https://blobvarium.com' },
     es: { title: 'Blobvarium', status: 'En línea',
-      text: 'Cada día nace una criatura inca dibujada al 100 % con código a partir de una semilla, sin IA ni imágenes base. Se gana en una subasta con monedas.' },
+      text: 'Cada día nace una criatura inca dibujada al 100 % con código a partir de una semilla, sin IA ni imágenes base. Se gana en una subasta con monedas.',
+      role: 'Proyecto en solitario. Lo difícil: un generador procedural en Python que dibuja una criatura distinta y coherente por cada semilla, más la subasta diaria sobre Supabase.',
+      stats: [['37', 'jugadores'], ['118', 'criaturas adoptadas'], ['151', 'pujas']] },
     en: { title: 'Blobvarium', status: 'Live',
-      text: 'A new Inca creature is born every day, drawn 100% by code from a seed, with no AI and no base images. You win it in a coin auction.' } },
+      text: 'A new Inca creature is born every day, drawn 100% by code from a seed, with no AI and no base images. You win it in a coin auction.',
+      role: 'Solo project. The hard part: a procedural generator in Python that draws a distinct, coherent creature for every seed, plus the daily auction on Supabase.',
+      stats: [['37', 'players'], ['118', 'creatures adopted'], ['151', 'bids']] } },
 
   { id: 'axie', pillar: 'games', year: '2023 · 2026', img: 'axie',
     gallery: ['shots/axie-evo-purity', 'shots/axie-nightmare', 'shots/axie-hazards', 'shots/axie-coop-themes',
@@ -69,9 +80,11 @@ window.PROJECTS = [
     tags: ['Unity 6', 'C#', 'UGS Sessions + Relay', 'Ronin', 'Spine'],
     links: { itch: 'https://kurusudes.itch.io/axiedarknessarise' },
     es: { title: 'Axie Darkness Arise', status: 'Revival · 4.º en la jam',
-      text: 'Roguelite de cartas donde cada parte de un Axie es una carta que se apunta sobre una arena en anillo. Nació en una semana para la Sky Mavis Game Jam 2023 (cuarto puesto) y lo retomamos: Axies propios desde la billetera Ronin, partes EVO, arenas que cambian según la colección y cooperativo online.' },
+      text: 'Roguelite de cartas donde cada parte de un Axie es una carta que se apunta sobre una arena en anillo. Nació en una semana para la Sky Mavis Game Jam 2023 (cuarto puesto) y lo retomamos: Axies propios desde la billetera Ronin, partes EVO, arenas que cambian según la colección y cooperativo online.',
+      role: 'Todo el código. Lo difícil: cooperativo online con lockstep determinista sobre UGS Relay, para que los dos jugadores simulen el mismo combate solo a partir de las entradas.' },
     en: { title: 'Axie Darkness Arise', status: 'Revival · 4th at the jam',
-      text: 'A roguelite card battler where every Axie body part is a card you aim across a ring-shaped arena. Born in one week for the Sky Mavis Game Jam 2023 (fourth place) and since revived: your own Axies from a Ronin wallet, EVO parts, arenas that change with the collection, and online co-op.' } },
+      text: 'A roguelite card battler where every Axie body part is a card you aim across a ring-shaped arena. Born in one week for the Sky Mavis Game Jam 2023 (fourth place) and since revived: your own Axies from a Ronin wallet, EVO parts, arenas that change with the collection, and online co-op.',
+      role: 'All the code. The hard part: online co-op with deterministic lockstep over UGS Relay, so both players simulate the same battle from inputs alone.' } },
 
   { id: 'katan', pillar: 'games', featured: true, year: '2026',
     img: ['katan', 'katan-diorama'],
@@ -84,9 +97,11 @@ window.PROJECTS = [
     links: { play: 'https://kurusudes.github.io/CatanTestFriendos/',
              repo: 'https://github.com/KurusuDes/CatanTestFriendos' },
     es: { title: 'Katan x Amiguites', status: 'Jugable',
-      text: 'Un juego de colonos en el navegador, con editor de mapas, bots, partidas online entre amigos, tablero en 3D y modos que no existen en la caja: a ciegas, con niebla o con eventos.' },
+      text: 'Un juego de colonos en el navegador, con editor de mapas, bots, partidas online entre amigos, tablero en 3D y modos que no existen en la caja: a ciegas, con niebla o con eventos.',
+      role: 'Proyecto en solitario, diseño y código. Lo difícil: sincronizar la partida entre pares por WebRTC sin servidor (el navegador del anfitrión es el juego) y bots en tres niveles que negocian, roban y bloquean.' },
     en: { title: 'Katan x Amiguites', status: 'Playable',
-      text: 'A settlers game in the browser, with a map editor, bots, online matches with friends, a 3D board and modes the box never had: blindfold, fog of war, random events.' } },
+      text: 'A settlers game in the browser, with a map editor, bots, online matches with friends, a 3D board and modes the box never had: blindfold, fog of war, random events.',
+      role: 'Solo project, design and code. The hard part: peer-to-peer match sync over WebRTC with no game server (the host’s browser runs the game), and bots at three levels that trade, rob and block.' } },
 
   { id: 'inflation', pillar: 'games', featured: true, year: '2026',
     video: { loop: 'inflation-loop',
@@ -97,11 +112,13 @@ window.PROJECTS = [
     tags: ['TypeScript', 'Three.js', 'PeerJS · WebRTC', 'Vite', 'Blender'],
     links: { play: 'https://kurusudes.github.io/rpg-anillos/' },
     es: { title: 'Inflation! Coop Lite-RPG', status: 'Jugable',
-      text: 'RPG incremental y cooperativo en el navegador: los combates son automáticos y las decisiones son tuyas. Cada ronda los combos se alargan y los números se disparan, hasta que el anillo que te aplastó se vuelve tu calentamiento. Con amigos por código de sala, sin servidor propio, y duelos entre rondas para ver quién tiene la mejor build.' },
+      text: 'RPG incremental y cooperativo en el navegador: los combates son automáticos y las decisiones son tuyas. Cada ronda los combos se alargan y los números se disparan, hasta que el anillo que te aplastó se vuelve tu calentamiento. Con amigos por código de sala, sin servidor propio, y duelos entre rondas para ver quién tiene la mejor build.',
+      role: 'Proyecto en solitario, diseño y código. Lo difícil: una simulación determinista en la que una semilla da el mismo mapa y los mismos combates en cada navegador, probada en Node, con multijugador por WebRTC.' },
     en: { title: 'Inflation! Coop Lite-RPG', status: 'Playable',
-      text: 'A co-op incremental RPG in the browser: battles are automatic, the decisions are yours. Every round your combos get longer and the numbers get sillier, until the ring that flattened you becomes your warm-up. Friends join with a room code, no server of its own, and duels between rounds settle who has the best build.' } },
+      text: 'A co-op incremental RPG in the browser: battles are automatic, the decisions are yours. Every round your combos get longer and the numbers get sillier, until the ring that flattened you becomes your warm-up. Friends join with a room code, no server of its own, and duels between rounds settle who has the best build.',
+      role: 'Solo project, design and code. The hard part: a deterministic simulation where one seed gives every browser the same map and the same battles, tested in Node, with multiplayer over WebRTC.' } },
 
-  { id: 'apocalipto', pillar: 'games', year: '2026', img: null, motif: 'tower',
+  { id: 'apocalipto', pillar: 'games', lab: true, year: '2026', img: null, motif: 'tower',
     tags: ['Unity 6 URP', 'Cloud Code', 'Cloud Save', 'Odin'],
     links: {},
     es: { title: 'Torre Viviente', status: 'En desarrollo',
@@ -109,7 +126,7 @@ window.PROJECTS = [
     en: { title: 'Living Tower', status: 'In development',
       text: 'A single-tower, third-person tower defense where the tower is you: it walks, anchors to mine deposits, holds off waves and grows floor by floor through roguelike events.' } },
 
-  { id: 'abyss', pillar: 'games', year: '2026', img: null, motif: 'hex',
+  { id: 'abyss', pillar: 'games', lab: true, year: '2026', img: null, motif: 'hex',
     tags: ['Unity', 'C#', 'Decoupled sim', 'Tests'],
     links: {},
     es: { title: 'The Abyssal Ledger', status: 'Prototipo',
@@ -117,7 +134,7 @@ window.PROJECTS = [
     en: { title: 'The Abyssal Ledger', status: 'Prototype',
       text: 'A tactical extraction autobattler on a hex field. The combat simulation lives in its own assembly, decoupled from Unity and covered by tests.' } },
 
-  { id: 'mergekingdoms', pillar: 'games', year: '2026', img: null,
+  { id: 'mergekingdoms', pillar: 'games', lab: true, year: '2026', img: null,
     tags: ['Unity', 'C#', 'EditMode tests'],
     links: {},
     es: { title: 'MergeKingdoms', status: 'En desarrollo',
@@ -125,7 +142,7 @@ window.PROJECTS = [
     en: { title: 'MergeKingdoms', status: 'In development',
       text: 'You merge blocks to build your kingdom, but every hundred years you choose: defend your neighbours from the threat, or loot them while they’re busy.' } },
 
-  { id: 'exponential', pillar: 'games', year: '2026', img: null, motif: 'arrows',
+  { id: 'exponential', pillar: 'games', lab: true, year: '2026', img: null, motif: 'arrows',
     tags: ['Unity 6 URP', 'C#'],
     links: { repo: 'https://github.com/KurusuDes/ExponentialGrow' },
     es: { title: 'Dungeon Discotec Disaster', status: 'Prototipo',
@@ -138,9 +155,11 @@ window.PROJECTS = [
     tags: ['Next.js', 'Supabase', 'Vercel', 'Virtual advisor'],
     links: { live: 'https://okara.pe' },
     es: { title: 'Okara', status: 'En producción',
-      text: 'Rediseño completo de una clínica estética de Lima: mobile-first, con una asesora virtual que atiende y capta pacientes las 24 horas, contenido sincronizado con sus redes y un panel para que el equipo lo gestione solo.' },
+      text: 'Rediseño completo de una clínica estética de Lima: mobile-first, con una asesora virtual que atiende y capta pacientes las 24 horas, contenido sincronizado con sus redes y un panel para que el equipo lo gestione solo.',
+      role: 'Full stack en solitario, de la propuesta a producción: Next.js y Supabase, la asesora virtual, la sincronización con redes y el panel de gestión.' },
     en: { title: 'Okara', status: 'In production',
-      text: 'A full redesign for an aesthetic clinic in Lima: mobile-first, with a virtual advisor that answers and captures patients around the clock, content synced from their social accounts and a panel the team runs on its own.' } },
+      text: 'A full redesign for an aesthetic clinic in Lima: mobile-first, with a virtual advisor that answers and captures patients around the clock, content synced from their social accounts and a panel the team runs on its own.',
+      role: 'Solo full-stack, from pitch to production: Next.js and Supabase, the virtual advisor, the social sync and the admin panel.' } },
 
   { id: 'ninawi', pillar: 'web', year: '2026', img: null,
     video: { loop: 'ninawi-loop',
@@ -148,9 +167,11 @@ window.PROJECTS = [
     tags: ['Matter.js', 'WebGL', 'Vercel'],
     links: { live: 'https://ninawi.com' },
     es: { title: 'Ninawi', status: 'En línea',
-      text: 'Web de agencia contada por salas: cada servicio es una gota con física real que se junta, se separa y se transforma mientras haces scroll, sobre un fondo que se calcula en la GPU.' },
+      text: 'Web de agencia contada por salas: cada servicio es una gota con física real que se junta, se separa y se transforma mientras haces scroll, sobre un fondo que se calcula en la GPU.',
+      role: 'Diseño y código. Lo difícil: física real con Matter.js atada al scroll que se mantiene fluida en el móvil, sobre un shader WebGL de fondo.' },
     en: { title: 'Ninawi', status: 'Live',
-      text: 'An agency site told in rooms: every service is a drop with real physics that merges, splits and transforms as you scroll, over a background computed on the GPU.' } },
+      text: 'An agency site told in rooms: every service is a drop with real physics that merges, splits and transforms as you scroll, over a background computed on the GPU.',
+      role: 'Design and code. The hard part: real Matter.js physics driven by scroll that stays smooth on phones, over a WebGL shader background.' } },
 
   { id: 'recupera', pillar: 'web', year: '2026', img: 'recupera',
     tags: ['HTML/CSS', 'JavaScript', 'Shop'],
@@ -270,13 +291,38 @@ window.AI_BLOCK = {
 window.CONTACT = [
   { label: 'GitHub', href: 'https://github.com/KurusuDes' },
   { label: 'itch.io', href: 'https://kurusudes.itch.io' },
-  { label: 'LinkedIn', href: '' },
-  { label: 'Email', href: '' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/juan-neyra-alonzo-69362218a/' },
+  { label: 'Email', href: 'mailto:juanneyra1399@gmail.com' },
+];
+
+// CV en PDF dentro de cv/. Vacío: el botón no se muestra en la portada ni en el pie.
+window.CV = '';
+
+// ───────────── EXPERIENCIA ─────────────
+// De lo más reciente a lo más antiguo. `when` vacío no se muestra.
+window.EXPERIENCE = [
+  { org: 'Tecsup', when: { es: 'Actualidad', en: 'Present' },
+    es: { role: 'Docente de desarrollo de videojuegos',
+      text: 'Programación aplicada a videojuegos y desarrollo multijugador para móviles con Netcode for GameObjects. También coordino parte del área.' },
+    en: { role: 'Game Development Instructor',
+      text: 'Programming applied to games, and mobile multiplayer with Netcode for GameObjects. I also take on coordination work in the department.' } },
+  { org: { es: 'Independiente', en: 'Freelance' }, when: { es: 'Actualidad', en: 'Present' },
+    es: { role: 'Desarrollador web full stack',
+      text: 'Sitios para clientes de Lima, de la propuesta a producción. Okara, una clínica estética, está en producción con Next.js, Supabase y una asesora virtual.' },
+    en: { role: 'Full-stack Web Developer',
+      text: 'Client sites in Lima, from pitch to production. Okara, an aesthetic clinic, is live on Next.js and Supabase with a virtual advisor.' } },
+  { org: 'Blue Gravity Studios', when: { es: '2023 · 4 meses', en: '2023 · 4 months' },
+    es: { role: 'Desarrollador Unity (contrato)',
+      text: 'Features de juego y herramientas de editor para Little Sim World, simulador de vida publicado en Steam.' },
+    en: { role: 'Unity Developer (contract)',
+      text: 'Gameplay features and editor tools for Little Sim World, a life sim released on Steam.' } },
 ];
 
 window.UI = {
   es: {
-    'nav.games': 'Juegos', 'nav.web': 'Web', 'nav.ai': 'IA local', 'nav.method': 'Método',
+    'nav.games': 'Juegos', 'nav.web': 'Web', 'nav.ai': 'IA local', 'nav.exp': 'Experiencia', 'nav.method': 'Método',
+    'hero.cv': 'Descargar CV', 'exp.title': 'Experiencia',
+    'card.role': 'Mi parte', 'lab.title': 'Lab / En curso', 'lab.note': 'prototipos sin capturas todavía',
     'hero.role': 'Game · Software · AI · Web Developer — Lima, Perú',
     'hero.lead': 'Desarrollador de Software y Videojuegos con más de 5 años de experiencia. También desarrollador web full stack sólido y de flujos de IA local.',
     'hero.cta': 'Ver trabajos',
@@ -301,7 +347,9 @@ window.UI = {
     'footer.made': 'Hecho a mano, sin plantillas. El tejido de arriba cambia cada día.',
   },
   en: {
-    'nav.games': 'Games', 'nav.web': 'Web', 'nav.ai': 'Local AI', 'nav.method': 'Method',
+    'nav.games': 'Games', 'nav.web': 'Web', 'nav.ai': 'Local AI', 'nav.exp': 'Experience', 'nav.method': 'Method',
+    'hero.cv': 'Download CV', 'exp.title': 'Experience',
+    'card.role': 'My part', 'lab.title': 'Lab / In progress', 'lab.note': 'prototypes, no footage yet',
     'hero.role': 'Game · Software · AI · Web Developer — Lima, Peru',
     'hero.lead': 'Software and Game Developer with 5+ years of experience. Also a strong full-stack web developer and builder of local AI workflows.',
     'hero.cta': 'See the work',

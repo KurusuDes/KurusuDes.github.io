@@ -54,6 +54,12 @@
     return links;
   }
 
+  // qué hice yo y el problema difícil, y las cifras medidas si las hay
+  const roleEl = L => L.role ? h('p', { class: 'card__role' },
+    h('span', { class: 'card__role-k', text: t('card.role') }), L.role) : null;
+  const statsEl = L => L.stats ? h('ul', { class: 'card__nums' },
+    L.stats.map(([n, label]) => h('li', {}, h('b', { text: n }), h('span', { text: label })))) : null;
+
   function card(p) {
     const L = p[lang];
     const pillar = PILLARS.find(x => x.id === p.pillar);
@@ -87,8 +93,35 @@
         h('p', { class: 'card__meta' }, h('span', { text: p.year }), h('span', { class: 'card__status', text: L.status })),
         h('h3', { class: 'card__title' }, h('button', { type: 'button', class: 'card__open', 'data-open': p.id, text: L.title })),
         h('p', { class: 'card__text', text: L.text }),
+        roleEl(L), statsEl(L),
         h('ul', { class: 'card__tags' }, p.tags.map(tag => h('li', { text: tag }))),
         h('p', { class: 'card__links' }, linkEls(p))));
+  }
+
+  // prototipos sin capturas: una lista plegada al final de la sección, no tarjetas que diluyan la rejilla
+  function lab(items) {
+    if (!items.length) return null;
+    return h('details', { class: 'lab' },
+      h('summary', {}, h('span', { class: 'lab__title', text: t('lab.title') }),
+        h('span', { class: 'lab__n', text: `${items.length} ${t('lab.note')}` })),
+      h('ul', { class: 'lab__list' }, items.map(p => {
+        const L = p[lang];
+        return h('li', { class: 'lab__item' },
+          h('p', { class: 'card__meta' }, h('span', { text: p.year }), h('span', { class: 'card__status', text: L.status })),
+          h('h3', { class: 'lab__name' }, h('button', { type: 'button', class: 'card__open', 'data-open': p.id, text: L.title })),
+          h('p', { class: 'lab__text', text: L.text }),
+          h('ul', { class: 'card__tags' }, p.tags.map(tag => h('li', { text: tag }))));
+      })));
+  }
+
+  // ── experiencia: línea de tiempo breve ──
+  const tx = v => (v && typeof v === 'object' ? v[lang] : v);
+  function experience() {
+    return EXPERIENCE.map(e => h('li', { class: 'exp__item' },
+      h('p', { class: 'exp__when', text: tx(e.when) || '' }),
+      h('div', {},
+        h('h3', { class: 'exp__role' }, e[lang].role, h('span', { class: 'exp__org', text: ` · ${tx(e.org)}` })),
+        h('p', { class: 'exp__text', text: e[lang].text }))));
   }
 
   // ── bloque de IA local: por qué, qué se despliega y cómo se usa ──
@@ -150,13 +183,22 @@
           h('h2', { class: 'section__title', id: `h-${p.id}`, text: p[lang].name }),
           h('p', { class: 'pillar__blurb', text: p[lang].blurb })),
         h('span', { class: 'thread thread--wide', 'aria-hidden': 'true' }),
-        h('div', { class: 'grid' }, PROJECTS.filter(x => x.pillar === p.id)
+        h('div', { class: 'grid' }, PROJECTS.filter(x => x.pillar === p.id && !x.lab)
           .sort((a, b) => hasCover(b) - hasCover(a))   // los que aún no tienen portada, siempre al final
-          .map(card)))));
+          .map(card)),
+        lab(PROJECTS.filter(x => x.pillar === p.id && x.lab)))));
+
+    $('.exp__list').replaceChildren(...experience());
+
+    // CV: en la portada y como primer canal del pie; sin archivo no se muestra
+    document.querySelectorAll('[data-cv]').forEach(a => { a.hidden = !CV; if (CV) a.href = CV; });
 
     // contacto
-    $('.foot__links').replaceChildren(...CONTACT.filter(c => c.href).map(c =>
-      h('li', {}, h('a', { href: c.href, target: '_blank', rel: 'noopener me', text: c.label + ' ↗' }))));
+    $('.foot__links').replaceChildren(
+      ...(CV ? [h('li', {}, h('a', { href: CV, download: '', class: 'is-cv', text: t('hero.cv') + ' ↓' }))] : []),
+      ...CONTACT.filter(c => c.href).map(c => c.href.startsWith('mailto:')
+        ? h('li', {}, h('a', { href: c.href, text: c.href.slice(7) }))
+        : h('li', {}, h('a', { href: c.href, target: '_blank', rel: 'noopener me', text: c.label + ' ↗' }))));
 
     setTimeout(drawCovers, 0);   // tras el layout, para que los canvas ya tengan tamaño
     watchVideos();
@@ -197,11 +239,12 @@
       h('button', { type: 'button', class: `detail__thumb${it.video ? ' is-video' : ''}`, 'data-i': i,
                     'aria-label': `${i + 1} / ${cur.items.length}` },
         it.poster || it.img ? h('img', { src: it.video ? it.poster : it.img.replace('.1920x1080.', '.600x338.'), alt: '', loading: 'lazy' }) : null)));
-    $('.detail__body').replaceChildren(
+    $('.detail__body').replaceChildren(...[
       h('p', { class: 'card__meta' }, h('span', { text: p.year }), h('span', { class: 'card__status', text: L.status })),
       h('p', { class: 'detail__text', text: L.text }),
+      roleEl(L), statsEl(L),
       h('ul', { class: 'card__tags' }, p.tags.map(tag => h('li', { text: tag }))),
-      h('p', { class: 'card__links' }, linkEls(p).filter(el => !el.classList.contains('card__watch'))));
+      h('p', { class: 'card__links' }, linkEls(p).filter(el => !el.classList.contains('card__watch')))].filter(Boolean));
     detail.showModal();
     show(at);
   }

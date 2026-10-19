@@ -1,35 +1,47 @@
 # kurusudes.github.io
 
-Portafolio de **Juan Neyra** — Game Developer · Software Developer · AI Developer · Web Developer (Lima, Perú).
+Portfolio of **Juan Neyra**: Game Developer · Software Developer · AI Developer · Web Developer (Lima, Peru).
 
-Videojuegos en Unity y para la web, sitios para marcas reales y flujos de IA local. En vivo: https://kurusudes.github.io
+Unity and browser games, websites for real brands, and local AI workflows. Live: https://kurusudes.github.io
 
-Sitio estático, sin build: `index.html` + `css/` + `js/`. Se publica tal cual con GitHub Pages.
+A static site with no build step: `index.html` + `css/` + `js/`, published as-is with GitHub Pages. The site
+defaults to English and has a Spanish toggle.
 
-## Añadir o cambiar un trabajo
+## Adding or changing a project
 
-Todo el contenido está en [`js/data.js`](js/data.js):
+All content lives in [`js/data.js`](js/data.js):
 
-- `PROJECTS`: un objeto por trabajo, con textos en `es` y `en`. Añadir uno es copiar un objeto y cambiarlo.
-  - `pillar`: `games` o `web`. Decide la sección y el color.
-  - `img`: nombre de un `.webp` en `img/` (o una URL completa), o `null` para que se teja una portada con el estado como sello. Los trabajos sin portada (ni `img` ni `video`) se muestran siempre al final de su sección.
-  - `video`: `{ loop, full }`. El bucle sin audio va en `video/<loop>.mp4` con su póster `.webp`; `full` abre el tráiler con sonido.
-  - `featured: true`: la tarjeta ocupa dos columnas.
-  - `links`: `play`, `live`, `steam`, `itch`, `repo`. Si no hay ninguno público, la tarjeta dice "Código privado".
-- `AI_BLOCK`: el bloque de IA local. Cada flujo es un diagrama de nodos: `[paso, herramienta, lo que sale]`.
-- `CONTACT`: los canales del pie. Los vacíos no se muestran.
-- `UI`: los textos fijos de la página en los dos idiomas.
+- `PROJECTS`: one object per project, with texts in `es` and `en`. To add one, copy an object and edit it.
+  - `pillar`: `games` or `web`. Sets the section and the color.
+  - `img`: name of a `.webp` in `img/` (or a full URL), or `null` to weave a cover with the status as a stamp. Projects with no cover (no `img` and no `video`) always go last in their section.
+  - `video`: `{ loop, full }`. The silent loop lives in `video/<loop>.mp4` with a `.webp` poster; `full` opens the trailer with sound.
+  - `gallery`: extra screenshots and videos for the project's detail view.
+  - `role` (inside `es`/`en`): what I did and the hard technical problem. Shown on the card and in the detail view.
+  - `stats` (inside `es`/`en`): measured numbers as `[number, label]` pairs.
+  - `lab: true`: a prototype with no footage yet. It goes into the collapsed "Lab / In progress" list at the end of its section instead of getting a full card.
+  - `featured: true`: the card spans two columns.
+  - `links`: `play`, `live`, `steam`, `itch`, `repo`. With none of them public, the card says "Private code".
+- `AI_BLOCK`: the local AI section. Each workflow is a node diagram: `[step, tool, output]`.
+- `EXPERIENCE`: the experience timeline, most recent first.
+- `CONTACT`: the footer channels. Empty ones are hidden.
+- `CV`: path to the CV PDF in `cv/`. Empty hides the "Download CV" buttons.
+- `UI`: the page's fixed strings in both languages.
 
-Las imágenes van en `img/` como WebP de 1200 px de ancho como máximo.
+Images go in `img/` as WebP, at most 1200 px wide.
 
-## El telar
+## The loom
 
-La portada teje filas de tocapus (los cuadros de los unkus andinos) con código. La semilla es la
-fecha del día (`AAAAMMDD`), así que el tejido cambia cada día y "Tejer otro" genera uno al azar.
-Está en [`js/loom.js`](js/loom.js).
+The hero weaves rows of tocapus (the squares on Andean unkus) with code. The seed is the day's date
+(`YYYYMMDD`), so the weave changes every day, and "Weave another" makes a random one.
+It lives in [`js/loom.js`](js/loom.js).
 
-## Probar en local
+## Running locally
 
 ```bash
 python -m http.server 8770
 ```
+
+---
+
+**En español:** portafolio de Juan Neyra. Todo el contenido, en los dos idiomas, está en `js/data.js`;
+el sitio se sirve tal cual con GitHub Pages.
