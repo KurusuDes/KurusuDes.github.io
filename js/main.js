@@ -25,6 +25,7 @@
   };
 
   const LINK_ORDER = ['play', 'live', 'steam', 'trailer', 'itch', 'repo'];
+  const hasCover = p => (p.img || p.video ? 1 : 0);
 
   function card(p) {
     const L = p[lang];
@@ -128,7 +129,9 @@
           h('h2', { class: 'section__title', id: `h-${p.id}`, text: p[lang].name }),
           h('p', { class: 'pillar__blurb', text: p[lang].blurb })),
         h('span', { class: 'thread thread--wide', 'aria-hidden': 'true' }),
-        h('div', { class: 'grid' }, PROJECTS.filter(x => x.pillar === p.id).map(card)))));
+        h('div', { class: 'grid' }, PROJECTS.filter(x => x.pillar === p.id)
+          .sort((a, b) => hasCover(b) - hasCover(a))   // los que aún no tienen portada, siempre al final
+          .map(card)))));
 
     // contacto
     $('.foot__links').replaceChildren(...CONTACT.filter(c => c.href).map(c =>

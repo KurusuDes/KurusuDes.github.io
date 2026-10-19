@@ -12,7 +12,7 @@ Todo el contenido está en [`js/data.js`](js/data.js):
 
 - `PROJECTS`: un objeto por trabajo, con textos en `es` y `en`. Añadir uno es copiar un objeto y cambiarlo.
   - `pillar`: `games` o `web`. Decide la sección y el color.
-  - `img`: nombre de un `.webp` en `img/` (o una URL completa), o `null` para que se teja una portada con el estado como sello.
+  - `img`: nombre de un `.webp` en `img/` (o una URL completa), o `null` para que se teja una portada con el estado como sello. Los trabajos sin portada (ni `img` ni `video`) se muestran siempre al final de su sección.
   - `video`: `{ loop, full }`. El bucle sin audio va en `video/<loop>.mp4` con su póster `.webp`; `full` abre el tráiler con sonido.
   - `featured: true`: la tarjeta ocupa dos columnas.
   - `links`: `play`, `live`, `steam`, `itch`, `repo`. Si no hay ninguno público, la tarjeta dice "Código privado".
