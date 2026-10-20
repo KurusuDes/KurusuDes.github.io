@@ -48,7 +48,7 @@ window.PROJECTS = [
       full: { es: 'video/morimonchis-trailer-es.mp4', en: 'video/morimonchis-trailer-en.mp4' } },
     gallery: [{ src: 'video/morimonchis-growth.mp4', poster: 'video/morimonchis-growth.webp' }],
     tags: ['Unity 6', 'C#', 'UGS Cloud Save', 'NavMesh', 'ScriptableObjects'],
-    links: { repo: 'https://github.com/KurusuDes/RunRunSimulator' },
+    links: {},
     es: { title: 'MoriMonchis', status: 'En desarrollo',
       text: 'Criaturas que se crían por genética: cada parte del cuerpo se hereda con sus propias probabilidades. En la arena salen de expedición con IA propia y minan, cazan, hacen de señuelo o huyen según su personalidad.',
       role: 'Proyecto en solitario, diseño y código. Lo difícil: herencia genética por parte del cuerpo con sus propias probabilidades e IA de expedición que decide según la personalidad, con el progreso en UGS Cloud Save.' },
@@ -149,7 +149,7 @@ window.PROJECTS = [
 
   { id: 'exponential', pillar: 'games', lab: true, year: '2026', img: null, motif: 'arrows',
     tags: ['Unity 6 URP', 'C#'],
-    links: { repo: 'https://github.com/KurusuDes/ExponentialGrow' },
+    links: {},
     es: { title: 'Dungeon Discotec Disaster', status: 'Prototipo',
       text: 'Roguelike por turnos: cada combo de flechas lanza un género musical (rock, salsa, electrónica…) que pega distinto según la raza del enemigo.' },
     en: { title: 'Dungeon Discotec Disaster', status: 'Prototype',
