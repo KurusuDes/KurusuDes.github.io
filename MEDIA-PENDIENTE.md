@@ -16,8 +16,7 @@ del portafolio los convierte (WebP de 1200 px, MP4 comprimido) y los añade a `g
 
 | Trabajo | Dónde vive | Falta |
 |---|---|---|
-| **Axie Darkness Arise** | `Documents/GitHub/AxieDarknessArise` | El render del **tráiler v8** de motion graphics (`Tools/Trailer/motion/out/trailer_v8.mp4`), que no está en esta PC; el bucle sale de él |
-| **MoriMonchis** (RunRunSimulator) | `Desktop/UnityProyects/RunRunSimulator` | Capturas nuevas (4–8) y el tráiler nuevo cuando esté listo |
+| **MoriMonchis** (RunRunSimulator) | `E:/GitHub/RunRunSimulator` | Capturas nuevas (4–8). El tráiler S170 (EN/ES) y su bucle ya están puestos |
 | **Torre Viviente** | `Desktop/UnityProyects/ApocaliptoBabylon` | Todo: portada, capturas y bucle |
 | **The Abyssal Ledger** | (no encontrado en esta PC) | Todo: portada, capturas y bucle |
 | **MergeKingdoms** | (no encontrado en esta PC) | Todo: portada, capturas y bucle |
