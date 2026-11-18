@@ -3,115 +3,125 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Juan Neyra · Game, Software, AI & Web Developer</title>
-<meta name="description" content="Juan Neyra, Game, Software, AI and Web Developer in Lima, Peru: Unity and browser games, websites for real brands, and local AI workflows.">
-<meta property="og:title" content="Juan Neyra · Game, Software, AI &amp; Web Developer">
-<meta property="og:description" content="Software and Game Developer with 5+ years of experience. Also a strong full-stack web developer and builder of local AI workflows.">
-<meta property="og:image" content="https://kurusudes.github.io/img/og-2.png">
+<title>Juan Neyra · TeaParty Game Studio</title>
+<meta name="description" content="Juan Neyra, game developer at TeaParty Game Studio: Inflation!, Blobvarium, Axie Darkness Arise, Feeling Lucky?, MoriMonchis and Katanittes. Real gameplay, most of it free in your browser.">
+<link rel="canonical" href="https://kurusudes.github.io/">
+<meta property="og:title" content="Juan Neyra · TeaParty Game Studio">
+<meta property="og:description" content="Game developer at TeaParty Game Studio. Inflation!, Blobvarium, Axie Darkness Arise, Feeling Lucky? and MoriMonchis.">
+<meta property="og:image" content="https://kurusudes.github.io/media/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://kurusudes.github.io/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#11163A">
-<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta name="twitter:site" content="@teapartystd">
+<meta name="theme-color" content="#0b0c14">
+<link rel="icon" href="media/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Jersey+15&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Jersey+15&family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="media/reel.webp">
+<link rel="stylesheet" href="css/aaa.css">
+<script>
+  // first visit of the session gets the 1 s intro; decided before paint so nothing flashes
+  (function () {
+    var d = document.documentElement, seen = false;
+    try { seen = sessionStorage.getItem('tp-intro') === '1'; } catch (e) {}
+    if (!seen && !matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.add('has-intro'); window.__introT0 = performance.now(); }
+    d.classList.add('js');
+  })();
+</script>
 </head>
 <body>
 
-<a class="skip" href="#trabajos" data-i18n="hero.cta">Ver trabajos</a>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__logo">
+    <img class="intro__steam" src="media/tp-steam.webp" alt="">
+    <img class="intro__cup" src="media/tp-cup.webp" alt="">
+    <img class="intro__word" src="media/tp-word.webp" alt="">
+  </div>
+  <p class="intro__skip pixel" data-i18n="aaa.intro.skip">Click or press any key to skip</p>
+</div>
+
+<div class="fx-grain" aria-hidden="true"></div>
+<div class="fx-vignette" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
 
 <header class="nav">
-  <div class="wrap nav__in">
-    <a class="nav__brand" href="#top" aria-label="Juan Neyra, inicio">
-      <canvas class="nav__mark" width="20" height="20" aria-hidden="true"></canvas>
-      <span>Juan Neyra</span>
-    </a>
-    <nav class="nav__links" aria-label="Secciones">
-      <a href="#games" data-i18n="nav.games">Juegos</a>
-      <a href="#web" data-i18n="nav.web">Web</a>
-      <a href="#ai" data-i18n="nav.ai">IA local</a>
-      <a href="#experience" data-i18n="nav.exp">Experiencia</a>
-      <a href="#metodo" data-i18n="nav.method">Método</a>
-    </nav>
-    <button class="lang" type="button" aria-label="Cambiar idioma / Change language">
-      <span data-lang="es">ES</span><span aria-hidden="true">/</span><span data-lang="en">EN</span>
+  <a class="nav__brand" href="#top" aria-label="TeaParty Game Studio, back to top">
+    <img src="media/favicon-48.png" alt="" width="34" height="34"><span class="pixel">TeaParty</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#games" data-i18n="aaa.nav.games">Games</a>
+    <a href="#brands" data-i18n="aaa.nav.brands">Brands</a>
+    <a href="#studio" data-i18n="aaa.nav.studio">Studio</a>
+  </nav>
+  <div class="nav__tools">
+    <button class="nav__sound" type="button" aria-pressed="false" aria-label="Sound off">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="nav__lang pixel" type="button" title="Change language / Cambiar idioma">
+      <span data-lang="en">EN</span><i aria-hidden="true">/</i><span data-lang="es">ES</span>
     </button>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero" aria-labelledby="hero-name">
-    <canvas class="loom" aria-hidden="true"></canvas>
-    <div class="hero__panel">
-      <p class="hero__role" data-i18n="hero.role">Game · Software · AI · Web Developer — Lima, Perú</p>
-      <h1 class="hero__name" id="hero-name">Juan<br>Neyra</h1>
-      <p class="hero__lead" data-i18n="hero.lead">Desarrollador de Software y Videojuegos con más de 5 años de experiencia. También desarrollador web full stack sólido y de flujos de IA local.</p>
-      <div class="hero__actions">
-        <a class="btn" href="#trabajos" data-i18n="hero.cta">Ver trabajos</a>
-        <a class="btn btn--ghost" href="cv/" download data-cv hidden data-i18n="hero.cv">Descargar CV</a>
-        <a class="btn btn--ghost" href="https://github.com/KurusuDes" rel="me">GitHub ↗</a>
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <video class="hero__reel" src="media/reel.mp4" poster="media/reel.webp" autoplay muted loop playsinline preload="auto" data-cursor="WATCH" data-reel-open aria-label="Gameplay reel"></video>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__content">
+      <p class="kicker pixel reveal-fade" data-i18n="aaa.hero.kicker">Portfolio · 2026</p>
+      <h1 class="hero__title shine"><span class="mask"><span>JUAN NEYRA</span></span></h1>
+      <p class="hero__sub"><span class="mask"><span><span data-i18n="aaa.hero.role">GAME DEVELOPER</span> <i>·</i> TEAPARTY GAME STUDIO</span></span></p>
+      <div class="hero__cta reveal-fade">
+        <button class="btn btn--solid magnetic" type="button" data-reel-open data-cursor="WATCH"><span class="btn__in"><svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg><span data-i18n="aaa.hero.reel">Watch reel</span></span></button>
+        <a class="btn btn--ghost magnetic" href="#games"><span class="btn__in" data-i18n="aaa.hero.games">See the games</span></a>
       </div>
     </div>
-    <div class="seed">
-      <p><span data-i18n="loom.label">Tejido nº</span> <b class="seed__n">—</b></p>
-      <p class="seed__note" data-i18n="loom.note">Se teje con código a partir de la fecha de hoy.</p>
-      <button class="seed__btn" type="button" data-i18n="loom.again">Tejer otro</button>
+    <a class="scroll-cue pixel" href="#games"><span data-i18n="aaa.hero.scroll">Scroll</span><i></i></a>
+    <canvas class="weave" aria-hidden="true"></canvas>
+    <div class="weave-card" aria-hidden="true">
+      <p class="pixel weave-card__num"></p>
+      <p class="weave-card__title"></p>
     </div>
   </section>
 
-  <section class="threads wrap" id="trabajos" aria-labelledby="threads-title">
-    <h2 class="visually-hidden" id="threads-title" data-i18n="threads.title">Tres hilos</h2>
-    <ol class="threads__list"></ol>
-  </section>
+  <!-- CHAPTERS: one per game with an `aaa` block in js/data.js -->
+  <div id="games" class="chapters"></div>
 
-  <div class="pillars"></div>
-
-  <section class="exp wrap" id="experience" aria-labelledby="exp-title">
-    <h2 class="section__title" id="exp-title" data-i18n="exp.title">Experiencia</h2>
-    <ol class="exp__list"></ol>
-  </section>
-
-  <section class="method wrap" id="metodo" aria-labelledby="method-title">
-    <h2 class="section__title" id="method-title" data-i18n="method.title">Cómo trabajo</h2>
-    <div class="method__grid">
-      <article>
-        <h3 data-i18n="method.agents.h"></h3>
-        <p data-i18n="method.agents.p"></p>
-      </article>
-      <article>
-        <h3 data-i18n="method.local.h"></h3>
-        <p data-i18n="method.local.p"></p>
-      </article>
-      <article>
-        <h3 data-i18n="method.teach.h"></h3>
-        <p data-i18n="method.teach.p"></p>
-      </article>
-    </div>
-  </section>
+  <section class="more" id="more" data-bg="#0b0c14" data-ink="#f8eed8"></section>
+  <section class="trophies" id="trophies" data-bg="#0b0c14" data-ink="#f8eed8"></section>
+  <section class="brands" id="brands" data-bg="#141625" data-ink="#f8eed8"></section>
+  <section class="studio" id="studio" data-bg="#f8eed8" data-ink="#141625"></section>
 </main>
 
-<footer class="foot" id="contacto">
-  <div class="wrap">
-    <h2 class="foot__title" data-i18n="footer.title">Hablemos</h2>
-    <p class="foot__p" data-i18n="footer.p"></p>
-    <ul class="foot__links"></ul>
-    <p class="foot__made" data-i18n="footer.made"></p>
-  </div>
+<footer class="footer">
+  <img class="footer__logo" src="media/tp-word.webp" alt="TeaParty Game Studio" width="360" height="342" loading="lazy">
+  <p class="footer__line" data-i18n="aaa.footer.line">Pour a cup, press start.</p>
+  <ul class="footer__links">
+    <li><a class="btn btn--ghost magnetic" href="https://teapartygamestudio.itch.io" target="_blank" rel="noopener"><span class="btn__in">itch.io</span></a></li>
+    <li><a class="btn btn--ghost magnetic" href="https://github.com/KurusuDes" target="_blank" rel="noopener"><span class="btn__in">GitHub</span></a></li>
+  </ul>
+  <p class="footer__fine pixel"><span data-i18n="aaa.footer.fine">© 2026 Juan Neyra · TeaParty Game Studio · All footage is real gameplay</span> · <a href="classic.html" data-i18n="aaa.footer.classic">Classic version</a></p>
 </footer>
 
-<dialog class="detail" aria-labelledby="detail-title">
-  <div class="detail__bar">
-    <h2 class="detail__title" id="detail-title"></h2>
-    <button class="detail__close" type="button" data-i18n="player.close">Cerrar</button>
-  </div>
-  <div class="detail__stage"></div>
-  <div class="detail__thumbs"></div>
-  <div class="detail__body"></div>
-</dialog>
+<div class="player" id="player" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+  <div class="player__bar player__bar--top"></div>
+  <video class="player__video" playsinline controls></video>
+  <div class="player__bar player__bar--bottom"></div>
+  <button class="player__close magnetic" type="button"><span class="btn__in"><span data-i18n="aaa.close">Close</span> ✕</span></button>
+</div>
+
+<canvas class="konami" aria-hidden="true"></canvas>
+<p class="konami__note pixel" role="status"></p>
 
 <script src="js/data.js"></script>
-<script src="js/loom.js"></script>
-<script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/aaa.js"></script>
 </body>
 </html>
