@@ -36,6 +36,9 @@ All content lives in [`js/data.js`](js/data.js):
     - `hook`: the giant headline, one entry per line. It stays in English in both languages.
     - `words` (`{ en: [3], es: [3] }`): the three power words under the hook.
     - `back`: the full-screen background, `{ video, poster }` or `{ cloth: true }` for a woven backdrop.
+      Background videos are 1920×1080 (H.264, CRF 20 or the lowest that stays under ~4 MB, 8–12 s loop with a 0.3 s crossfade at the wrap).
+      Add `soft: true` when the footage only exists in 720p or less: the chapter then blurs it like depth of field,
+      washes it in its `--soft-tint` colour, adds grain and moves it less (`.stage__bg--soft` in `css/aaa.css`).
     - `frame`: an optional framed clip on the right, `{ video, poster, ratio, alt }`.
     - `char`: an optional cut-out character with transparency, `{ img, w, h, alt: { en, es } }`.
     - `play`: the "Play free" link. Leave it out when there is no public page (MoriMonchis).

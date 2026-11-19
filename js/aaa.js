@@ -55,7 +55,7 @@
     const n = pad(i + 1);
     const stage = h('div', { class: 'stage' });
     if (A.back && A.back.video)
-      stage.append(h('div', { class: 'stage__bg layer', 'data-depth': '0.12' },
+      stage.append(h('div', { class: `stage__bg layer${A.back.soft ? ' stage__bg--soft' : ''}`, 'data-depth': A.back.soft ? '0.04' : '0.06' },
         vid(A.back.video, A.back.poster, { 'data-auto': true, 'aria-hidden': 'true' })));
     if (A.back && A.back.cloth) stage.append(h('canvas', { class: 'stage__cloth layer', 'data-depth': '0.1', 'aria-hidden': 'true' }));
     stage.append(h('div', { class: 'stage__tint', 'aria-hidden': 'true' }));
@@ -626,7 +626,7 @@
     });
     const p = { v: 0 };
     tl.to('.hero__content, .scroll-cue', { y: -90, opacity: 0, ease: 'power2.in', duration: .3 }, 0)
-      .to('.hero__reel', { scale: 1.12, ease: 'none', duration: .85 }, 0)
+      .to('.hero__reel', { scale: 1.06, ease: 'none', duration: .85 }, 0)
       .to(p, { v: 1, ease: 'none', duration: .7, onUpdate: () => curtain.draw(p.v) }, .1)
       .fromTo('.weave-card', { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, ease: 'power3.out', duration: .15 }, .8);
 
@@ -640,8 +640,10 @@
         const d = +l.dataset.depth || 0;
         ctl.fromTo(l, { y: d * 260 }, { y: -d * 260, ease: 'none' }, 0);
       });
-      const back = $('.stage__bg video, .stage__cloth', stage);
-      if (back) ctl.fromTo(back, { scale: 1.12 }, { scale: 1, ease: 'none' }, 0);
+      // video backgrounds stay under ~1.1x in total (overscan + this tween) so 1080p holds up; soft ones barely move
+      const video = $('.stage__bg video', stage), cloth = $('.stage__cloth', stage);
+      if (video) ctl.fromTo(video, { scale: video.parentNode.classList.contains('stage__bg--soft') ? 1.02 : 1.06 }, { scale: 1, ease: 'none' }, 0);
+      if (cloth) ctl.fromTo(cloth, { scale: 1.12 }, { scale: 1, ease: 'none' }, 0);
     });
     return () => curtain.draw(0);
   });
